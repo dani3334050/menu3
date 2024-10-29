@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitio con Mega Menú</title>
+    <style>
+        :root {
+            --color-primary: #6a4c93;
+            --color-secondary: #8b5fbf;
+            --color-background: #f0e6ef;
+            --color-text: #2b2d42;
+            --color-hover: #ff6b6b;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 2rem;
+        }
+        nav {
+            position: relative;
+        }
+        .menu-toggle {
+            display: none;
+        }
+        .mega-menu {
+            display: flex;
+        }
+        .mega-menu-item {
+            position: relative;
+        }
+        .mega-menu-trigger {
+            color: white;
+            padding: 1rem;
+            text-decoration: none;
+            display: block;
+        }
+        .mega-menu-trigger:hover {
+            background-color: var(--color-secondary);
+        }
+        .mega-menu-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+            width: 100vw;
+            max-width: 1000px;
+            padding: 2rem;
+        }
+        .mega-menu-item:hover .mega-menu-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .mega-menu-category h3 {
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .mega-menu-category ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .mega-menu-category li a {
+            color: var(--color-text);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+        .mega-menu-category li a:hover {
+            color: var(--color-hover);
+        }
+        main {
+            padding: 2rem 0;
+        }
+        .hero {
+            background-color: white;
+            padding: 3rem 0;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+        }
+        footer {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .menu-toggle {
+                display: block;
+                width: auto;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1rem;
+                cursor: pointer;
+                padding: 1rem;
+                text-align: center;
+            }
+            .mega-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+            }
+            .mega-menu.active {
+                display: flex;
+            }
+            .mega-menu-content {
+                position: static;
+                display: none;
+                width: 100%;
+                max-width: none;
+                padding: 1rem;
+                transform: none;
+                left: 0;
+            }
+            .mega-menu-item:hover .mega-menu-content {
+                display: block;
+            }
+            .mega-menu-category {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">MegaSitio</div>
+                <nav>
+                    <button class="menu-toggle" aria-expanded="false" aria-controls="mega-menu">
+                        Menú
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="mega-menu" id="mega-menu">
+                        <div class="mega-menu-item">
+                            <a href="#" class="mega-menu-trigger">Productos</a>
+                            <div class="mega-menu-content">
+                                <div class="mega-menu-category">
+                                    <h3>Electrónica</h3>
+                                    <ul>
+                                        <li><a href="#">Smartphones</a></li>
+                                        <li><a href="#">Laptops</a></li>
+                                        <li><a href="#">Tablets</a></li>
+                                        <li><a href="#">Accesorios</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Hogar</h3>
+                                    <ul>
+                                        <li><a href="#">Muebles</a></li>
+                                        <li><a href="#">Decoración</a></li>
+                                        <li><a href="#">Electrodomésticos</a></li>
+                                        <li><a href="#">Jardín</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Moda</h3>
+                                    <ul>
+                                        <li><a href="#">Ropa para mujer</a></li>
+                                        <li><a href="#">Ropa para hombre</a></li>
+                                        <li><a href="#">Calzado</a></li>
+                                        <li><a href="#">Accesorios</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Deportes</h3>
+                                    <ul>
+                                        <li><a href="#">Equipamiento</a></li>
+                                        <li><a href="#">Ropa deportiva</a></li>
+                                        <li><a href="#">Nutrición</a></li>
+                                        <li><a href="#">Accesorios</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mega-menu-item">
+                            <a href="#" class="mega-menu-trigger">Servicios</a>
+                            <div class="mega-menu-content">
+                                <div class="mega-menu-category">
+                                    <h3>Financieros</h3>
+                                    <ul>
+                                        <li><a href="#">Cuentas bancarias</a></li>
+                                        <li><a href="#">Préstamos</a></li>
+                                        <li><a href="#">Inversiones</a></li>
+                                        <li><a href="#">Seguros</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Tecnología</h3>
+                                    <ul>
+                                        <li><a href="#">Desarrollo web</a></li>
+                                        <li><a href="#">Diseño gráfico</a></li>
+                                        <li><a href="#">Marketing digital</a></li>
+                                        <li><a href="#">Soporte técnico</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Educación</h3>
+                                    <ul>
+                                        <li><a href="#">Cursos online</a></li>
+                                        <li><a href="#">Tutorías</a></li>
+                                        <li><a href="#">Certificaciones</a></li>
+                                        <li><a href="#">Idiomas</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Salud y Bienestar</h3>
+                                    <ul>
+                                        <li><a href="#">Consultas médicas</a></li>
+                                        <li><a href="#">Terapias</a></li>
+                                        <li><a href="#">Nutrición</a></li>
+                                        <li><a href="#">Fitness</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mega-menu-item">
+                            <a href="#" class="mega-menu-trigger">Recursos</a>
+                            <div class="mega-menu-content">
+                                <div class="mega-menu-category">
+                                    <h3>Blog</h3>
+                                    <ul>
+                                        <li><a href="#">Artículos recientes</a></li>
+                                        <li><a href="#">Tutoriales</a></li>
+                                        <li><a href="#">Noticias</a></li>
+                                        <li><a href="#">Opiniones</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Descargas</h3>
+                                    <ul>
+                                        <li><a href="#">E-books</a></li>
+                                        <li><a href="#">Plantillas</a></li>
+                                        <li><a href="#">Herramientas</a></li>
+                                        <li><a href="#">Recursos gratuitos</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Comunidad</h3>
+                                    <ul>
+                                        <li><a href="#">Foros</a></li>
+                                        <li><a href="#">Eventos</a></li>
+                                        <li><a href="#">Grupos de usuarios</a></li>
+                                        <li><a href="#">Colaboraciones</a></li>
+                                    </ul>
+                                </div>
+                                <div class="mega-menu-category">
+                                    <h3>Soporte</h3>
+                                    <ul>
+                                        <li><a href="#">FAQ</a></li>
+                                        <li><a href="#">Documentación</a></li>
+                                        <li><a href="#">Contacto</a></li>
+                                        <li><a href="#">Chat en vivo</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>MegaSitio</h1>
+            <p>Descubre nuestros productos, servicios y recursos increíbles.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 MegaSitio. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const megaMenu = document.getElementById('mega-menu');
+
+        menuToggle.addEventListener('click', () => {
+            const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+            menuToggle.setAttribute('aria-expanded', !expanded);
+            megaMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
